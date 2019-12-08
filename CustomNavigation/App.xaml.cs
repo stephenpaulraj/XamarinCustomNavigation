@@ -12,9 +12,7 @@ namespace CustomNavigation
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
-            MainPage = new MainPage();
+            MainPage = new CustomNavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

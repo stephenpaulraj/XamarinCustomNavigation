@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomNavigation.Views.LoginPage" NavigationPage.HasBackButton="False" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Image Source="flooop.png" VerticalOptions="Center" HorizontalOptions="Center"></Image>
+            <Entry x:Name="uname"
+                   FontSize="Small"
+                   HorizontalTextAlignment="Start"
+                   Placeholder="Username - demo"
+                   WidthRequest="220"
+                   Margin="0,10,0,0"
+                   />
+            <Entry x:Name="pass"
+                   FontSize="Small"
+                   HorizontalTextAlignment="Start"
+                   IsPassword="True"
+                   Margin="0,10,0,0"
+                   Placeholder="Password - demo"
+                   WidthRequest="220"/>
+            <Button Text="Login" BackgroundColor="Red" TextColor="White" WidthRequest="150" Margin="0,10,0,0" Clicked="Login"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

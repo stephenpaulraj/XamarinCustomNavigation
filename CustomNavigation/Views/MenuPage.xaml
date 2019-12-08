@@ -1,22 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="CustomNavigation.Views.MenuPage" Title="Menu">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:CustomNavigation.ViewModels;assembly=CustomNavigation"
+             mc:Ignorable="d"
+             x:Class="CustomNavigation.Views.MenuPage"
+             Title="☰" Icon="hamburger.png" BackgroundColor="#ffffff" NavigationPage.HasNavigationBar="True" NavigationPage.TitleIcon="flooop.png">
+    <ContentPage.BindingContext>
+        <viewModels:ItemsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <x:Double  x:Key="MenuFontSize">20</x:Double>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="ListViewMenu" HasUnevenRows="True">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Item 1</x:String>
-                    <x:String>Item 2</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+       <ScrollView VerticalScrollBarVisibility="Never">
+            <StackLayout VerticalOptions="FillAndExpand">
+            <ListView x:Name="MenuItemsListView" SeparatorVisibility="None" 
+              HasUnevenRows="true" ItemsSource="{Binding MenuItems}" HeightRequest="700">
+                <ListView.Header>
+                    <Grid BackgroundColor="#EEEEEE">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="260" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             Margin="0,24,0,0"
+                             VerticalOptions="Center">
+                    
+                </StackLayout>
+                        <StackLayout Grid.Row="1" 
+                             Grid.Column="1"
+                             Margin="0,10,0,0"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Start">
+                            <StackLayout Orientation="Vertical">
+                                <Image Source="xamarin_logo.png" HeightRequest="120" WidthRequest="120" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </StackLayout>
+                            
+                               <Label FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" 
+                           Text="Hey User!!" TextColor="#414141" />
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center"  Text="User Id :" TextColor="#414141" />
+                                <Label FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center"  Text="528" TextColor="#414141" />
+                            </StackLayout>
+                        </StackLayout>  
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="FillAndExpand" Padding="15,15" Margin="0,0,0,0" HorizontalOptions="FillAndExpand">
+                                <Label VerticalOptions="FillAndExpand" 
+                                VerticalTextAlignment="Center" 
+                                Text="{Binding Title}" 
+                                FontSize="16"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
 </ContentPage>

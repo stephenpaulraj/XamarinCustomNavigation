@@ -6,7 +6,7 @@ namespace CustomNavigation.Models
 {
     public enum MenuItemType
     {
-        Browse,
+        Home,
         About
     }
     public class HomeMenuItem

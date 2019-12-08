@@ -65,6 +65,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\CustomNavigationRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -119,6 +120,9 @@
     <BundleResource Include="Resources\xamarin_logo%402x.png" />
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\hamburger.png" />
+    <BundleResource Include="Resources\flooop.png" />
+    <BundleResource Include="Resources\backbutton.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -139,5 +143,8 @@
       <Project>{4D31BABE-C101-44A4-A038-33254963400E}</Project>
       <Name>CustomNavigation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
   </ItemGroup>
 </Project>

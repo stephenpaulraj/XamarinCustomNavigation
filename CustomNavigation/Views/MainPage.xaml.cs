@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 using CustomNavigation.Models;
 
 namespace CustomNavigation.Views
@@ -14,42 +15,22 @@ namespace CustomNavigation.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
     {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+        
         public MainPage()
         {
             InitializeComponent();
-
-            MasterBehavior = MasterBehavior.Popover;
-
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MasterPage.ListView.ItemSelected += ListView_ItemSelected;
         }
 
-        public async Task NavigateFromMenu(int id)
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (!MenuPages.ContainsKey(id))
-            {
-                switch (id)
-                {
-                    case (int)MenuItemType.Browse:
-                        MenuPages.Add(id, new NavigationPage(new ItemsPage()));
-                        break;
-                    case (int)MenuItemType.About:
-                        MenuPages.Add(id, new NavigationPage(new AboutPage()));
-                        break;
-                }
-            }
-
-            var newPage = MenuPages[id];
-
-            if (newPage != null && Detail != newPage)
-            {
-                Detail = newPage;
-
-                if (Device.RuntimePlatform == Device.Android)
-                    await Task.Delay(100);
-
-                IsPresented = false;
-            }
+            var item = e.SelectedItem as MenuItems;
+            if (item == null)
+                return;
+            //Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+            Application.Current.MainPage.Navigation.PushAsync((Page)Activator.CreateInstance(item.TargetType));
+            IsPresented = false;
+            MasterPage.ListView.SelectedItem = null;
         }
     }
 }

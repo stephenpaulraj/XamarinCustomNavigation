@@ -12,47 +12,19 @@ namespace CustomNavigation.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
-        public Command LoadItemsCommand { get; set; }
-
+        public ObservableCollection<MenuItems> MenuItems { get; set; }
         public ItemsViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
-            });
-        }
-
-        async Task ExecuteLoadItemsCommand()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
-            try
-            {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+            MenuItems = new ObservableCollection<MenuItems>(new[]
                 {
-                    Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+
+                    new MenuItems { Id = 1, Title = "Home", TargetType = typeof(MainPage)},
+                    new MenuItems { Id = 2, Title = "First Page", TargetType = typeof(FirstPage) },
+                    new MenuItems { Id = 3, Title = "Second Page", TargetType = typeof(SecondPage) },
+                    new MenuItems { Id = 4, Title = "Third Page", TargetType = typeof(ThirdPage) },
+                    new MenuItems { Id = 5, Title = "Fourth Page", TargetType = typeof(FourthPage) },
+                    new MenuItems { Id = 6, Title = "Logout", TargetType = typeof(LoginPage) },
+                });
         }
     }
 }
